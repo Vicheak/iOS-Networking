@@ -192,7 +192,7 @@ extension HomeViewController: UISearchResultsUpdating {
         if searchText.isEmpty {
             fetchedResultsController.fetchRequest.predicate = nil
         } else {
-            fetchedResultsController.fetchRequest.predicate = NSPredicate(format: "name = %@", searchText)
+            fetchedResultsController.fetchRequest.predicate = NSPredicate(format: "name CONTAINS[c] %@", searchText)
         }
         try? fetchedResultsController.performFetch()
         collectionView.reloadData()

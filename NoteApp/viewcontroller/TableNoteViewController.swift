@@ -184,7 +184,7 @@ extension TableNoteViewController: UISearchResultsUpdating {
         if searchText.isEmpty {
             fetchedResultsController.fetchRequest.predicate = NSPredicate(format: "folder = %@", folder)
         } else {
-            fetchedResultsController.fetchRequest.predicate = NSPredicate(format: "title = %@ AND folder = %@", searchText, folder)
+            fetchedResultsController.fetchRequest.predicate = NSPredicate(format: "title CONTAINS[c] %@ AND folder = %@", searchText, folder)
         }
         try? fetchedResultsController.performFetch()
         tableView.reloadData()
