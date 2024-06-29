@@ -30,8 +30,8 @@ class FolderCollectionViewCell: UICollectionViewCell {
     }()
     lazy var numberOfNoteLabel = {
         let numberOfNoteLabel = UILabel()
-        numberOfNoteLabel.text = "notes :"
-        numberOfNoteLabel.font = UIFont(name: "HelveticaNeue", size: 15)
+        numberOfNoteLabel.text = "notes()"
+        numberOfNoteLabel.font = UIFont.boldSystemFont(ofSize: 15)
         numberOfNoteLabel.textColor = .black
         numberOfNoteLabel.textAlignment = .left
         return numberOfNoteLabel

@@ -238,7 +238,7 @@ extension HomeViewController: UICollectionViewDataSource {
         let folder = fetchedResultsController.object(at: indexPath)
         
         collectionViewCell.titleLabel.text = folder.name
-        collectionViewCell.numberOfNoteLabel.text = "note : \(folder.notes?.count ?? 0)"
+        collectionViewCell.numberOfNoteLabel.text = "note(\(folder.notes?.count ?? 0))"
         return collectionViewCell
     }
     
