@@ -12,9 +12,15 @@ class FolderCollectionViewCell: UICollectionViewCell {
 
     lazy var folderImageView = {
         let folderImageView = UIImageView()
-        folderImageView.image = UIImage(systemName: "folder.fill")
         folderImageView.contentMode = .scaleAspectFit
         folderImageView.tintColor = .folderColor
+        
+        guard let folderIcon = UIImage(named: "folder-icon") else {
+            folderImageView.image = UIImage(systemName: "folder.fill")
+            return folderImageView
+        }
+        folderImageView.image = folderIcon
+        
         return folderImageView
     }()
     lazy var titleLabel = {
@@ -26,7 +32,7 @@ class FolderCollectionViewCell: UICollectionViewCell {
         let numberOfNoteLabel = UILabel()
         numberOfNoteLabel.text = "notes :"
         numberOfNoteLabel.font = UIFont(name: "HelveticaNeue", size: 15)
-        numberOfNoteLabel.textColor = .white
+        numberOfNoteLabel.textColor = .black
         numberOfNoteLabel.textAlignment = .left
         return numberOfNoteLabel
     }()
