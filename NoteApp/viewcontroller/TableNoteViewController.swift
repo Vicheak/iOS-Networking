@@ -45,6 +45,34 @@ class TableNoteViewController: UIViewController {
     
     var folder: Folder!
     
+    //search not found view
+    var searchView = UIView()
+    lazy var searchStackView  = {
+        let searchStackView = UIStackView()
+        searchStackView.axis = .vertical
+        searchStackView.distribution = .fill
+        searchStackView.alignment = .fill
+        searchStackView.spacing = 20
+        searchStackView.contentMode = .scaleToFill
+        return searchStackView
+    }()
+    var bottomConstraint: Constraint!
+    lazy var searchImageView = {
+        let searchImageView = UIImageView()
+        searchImageView.image = UIImage(systemName: "mail.and.text.magnifyingglass")
+        searchImageView.contentMode = .scaleAspectFit
+        searchImageView.tintColor = .folderColor
+        return searchImageView
+    }()
+    var searchTitleLabel = {
+        let searchTitleLabel = UILabel()
+        searchTitleLabel.text = "Search not found!"
+        searchTitleLabel.textAlignment = .center
+        searchTitleLabel.numberOfLines = 0
+        return searchTitleLabel
+    }()
+    var keyboardUtil: KeyboardUtil!
+    
     override func viewDidLoad() {
         super.viewDidLoad();
         view.backgroundColor = .white;
@@ -58,6 +86,11 @@ class TableNoteViewController: UIViewController {
         searchController.searchResultsUpdater = self
         
         setUpView();
+        setUpSearchView()
+        
+        toggleSearchView(enable: false, searchText: "")
+        
+        keyboardUtil = KeyboardUtil(view: view, bottomConstraint: bottomConstraint)
         
         titleLabel.text = "Folder Name : \(folder.name!)"
         detailLabel.text = "Folder Detail : \(folder.detail!)"
@@ -96,6 +129,37 @@ class TableNoteViewController: UIViewController {
         }
     }
     
+    private func setUpSearchView(){
+        view.addSubview(searchView)
+        searchView.addSubview(searchStackView)
+        searchStackView.addArrangedSubview(searchImageView)
+        searchStackView.addArrangedSubview(searchTitleLabel)
+        
+        searchView.snp.makeConstraints { make in
+            make.top.equalTo(detailLabel.snp.bottom).offset(40)
+            make.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+            bottomConstraint = make.bottom.equalTo(view.safeAreaLayoutGuide).constraint
+        }
+        
+        searchStackView.snp.makeConstraints { make in
+            make.top.greaterThanOrEqualToSuperview().offset(0)
+            make.leading.equalToSuperview().offset(40)
+            make.bottom.lessThanOrEqualToSuperview().offset(0)
+            make.trailing.equalToSuperview().offset(-40)
+            make.centerX.centerY.equalToSuperview()
+        }
+        
+        searchImageView.snp.makeConstraints { make in
+            make.height.equalTo(100)
+        }
+    }
+    
+    private func toggleSearchView(enable: Bool, searchText: String){
+        tableView.isHidden = enable
+        searchView.isHidden = !enable
+        searchTitleLabel.text = "Search not found \"\(searchText)\""
+    }
+    
     override func viewWillTransition(to size: CGSize, with coordinator: any UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         tableView.layoutIfNeeded()
@@ -113,6 +177,9 @@ class TableNoteViewController: UIViewController {
 extension TableNoteViewController: UISearchResultsUpdating {
     
     func updateSearchResults(for searchController: UISearchController) {
+        if folder.notes?.count ?? 0 == 0 {
+            return
+        }
         let searchText = searchController.searchBar.text ?? ""
         if searchText.isEmpty {
             fetchedResultsController.fetchRequest.predicate = NSPredicate(format: "folder = %@", folder)
@@ -121,6 +188,7 @@ extension TableNoteViewController: UISearchResultsUpdating {
         }
         try? fetchedResultsController.performFetch()
         tableView.reloadData()
+        toggleSearchView(enable: fetchedResultsController.fetchedObjects?.isEmpty ?? true, searchText: searchText)
     }
     
 }
