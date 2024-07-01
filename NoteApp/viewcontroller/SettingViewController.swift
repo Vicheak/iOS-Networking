@@ -11,12 +11,21 @@ import KeychainSwift
 
 class SettingViewController: UIViewController {
     
+    var scrollView = UIScrollView()
+    var mainView = UIView()
+    lazy var stackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.distribution = .equalCentering
+        stackView.alignment = .center
+        stackView.spacing = 20
+        stackView.contentMode = .scaleToFill
+        return stackView
+    }()
     lazy var userImageView = {
         let userImageView = UIImageView()
         userImageView.contentMode = .scaleAspectFit
         userImageView.tintColor = .black
-        userImageView.layer.cornerRadius = userImageView.frame.width / 2
-        userImageView.clipsToBounds = true
         userImageView.image = UIImage(systemName: "person.circle.fill")
         return userImageView
     }()
@@ -47,32 +56,51 @@ class SettingViewController: UIViewController {
         let username = keychain.get("username")
         titleLabel.text = "Welcome \(username!)"
         
+        //load image from document directory
+        let imageName = UserDefaults.standard.string(forKey: "imageName")
+        if let imageName = imageName {
+            let fileManager = FileManager.default
+            let directoryPath = fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0]
+            let filePath = directoryPath.appendingPathComponent(imageName)
+            //...
+        }
+        
         pickButton.addTarget(self, action: #selector(pickImage), for: .touchUpInside)
     }
     
     private func setUpViews(){
-        view.addSubview(userImageView)
-        view.addSubview(pickButton)
-        view.addSubview(titleLabel)
+        view.addSubview(scrollView)
+        scrollView.addSubview(mainView)
+        mainView.addSubview(stackView)
+        stackView.addArrangedSubview(titleLabel)
+        stackView.addArrangedSubview(userImageView)
+        stackView.addArrangedSubview(pickButton)
+        
+        scrollView.snp.makeConstraints { make in
+            make.edges.equalTo(view.safeAreaLayoutGuide)
+        }
+        
+        mainView.snp.makeConstraints { make in
+            make.top.leading.bottom.trailing.equalTo(scrollView.contentLayoutGuide)
+            make.width.height.equalTo(scrollView.frameLayoutGuide)
+        }
+        
+        stackView.snp.makeConstraints { make in
+            make.top.greaterThanOrEqualToSuperview().offset(0)
+            make.leading.equalToSuperview().offset(10)
+            make.bottom.lessThanOrEqualToSuperview().offset(0)
+            make.trailing.equalToSuperview().offset(-10)
+            make.centerX.centerY.equalToSuperview()
+        }
         
         userImageView.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide).offset(40)
-            make.leading.equalTo(view.safeAreaLayoutGuide).offset(30)
-            make.trailing.equalTo(view.safeAreaLayoutGuide).offset(-30)
             make.height.equalTo(150)
+            make.width.equalTo(150)
         }
         
         pickButton.snp.makeConstraints { make in
-            make.top.equalTo(userImageView.snp.bottom).offset(30)
-            make.centerX.equalTo(view.safeAreaLayoutGuide)
             make.height.equalTo(40)
             make.width.equalTo(200)
-        }
-        
-        titleLabel.snp.makeConstraints { make in
-            make.top.equalTo(pickButton.snp.bottom).offset(30)
-            make.leading.equalTo(view.safeAreaLayoutGuide).offset(30)
-            make.trailing.equalTo(view.safeAreaLayoutGuide).offset(-30)
         }
     }
     
@@ -136,16 +164,24 @@ extension SettingViewController: UIImagePickerControllerDelegate, UINavigationCo
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         picker.dismiss(animated: true, completion: nil)
-        print(info)
         if let image = info[.originalImage] as? UIImage {
             //save the seleted image as JPEG file
             let fileName = UUID().uuidString + ".jpg"
             if let savedURL = ImageUtil.saveImageAsJPEG(image, to: .documentDirectory, withName: fileName, compressionQuality: 0.8){
                 print("Save image URL : \(savedURL)")
                 
-                //load image from document directory set to user image view
-                //...
+                //set to user image view
                 userImageView.image = image
+                if ImageUtil.checkEqualImageScale(image: image) {
+                    userImageView.layer.cornerRadius = userImageView.frame.size.width / 2
+                    userImageView.layer.masksToBounds = true
+                }else{
+                    userImageView.layer.cornerRadius = 0
+                    userImageView.layer.masksToBounds = false
+                }
+                
+                //store image name in user defaults
+                UserDefaults.standard.set(fileName, forKey: "imageName")
             }
         }
     }

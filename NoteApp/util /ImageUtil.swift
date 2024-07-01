@@ -77,4 +77,8 @@ class ImageUtil {
         }
     }
     
+    public static func checkEqualImageScale(image: UIImage) -> Bool{
+        return image.size.width == image.size.height 
+    }
+    
 }
