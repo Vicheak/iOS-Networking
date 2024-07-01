@@ -15,6 +15,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         window = UIWindow(frame: UIScreen.main.bounds)
+        
+        //test login screen
+//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//        let viewController = storyboard.instantiateViewController(withIdentifier: "TestViewController")
     
         window?.rootViewController = LoginScreenViewController()
         window?.makeKeyAndVisible()
@@ -44,6 +48,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         return true
+    }
+    
+    func applicationWillTerminate(_ application: UIApplication) {
+        //remove all files from tmp directory
+        FileUtil.deleteAllTmpFile()
+        
+        try? CoreDataManager.shared.context.save()
     }
 
 }

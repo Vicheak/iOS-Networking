@@ -64,15 +64,11 @@ class SettingViewController: UIViewController {
             let filePath = directoryPath.appendingPathComponent(imageName)
             
             if let image = UIImage(contentsOfFile: filePath.path) {
-                print("Image name : \(imageName)")
-                print("Image object : \(image)")
-                 
                 userImageView.image = image
-                checkImageCircleBound(image: image)
-                
-                //...
-                userImageView.layer.cornerRadius = userImageView.frame.size.width / 2
-                userImageView.layer.masksToBounds = true
+                DispatchQueue.main.async { [weak self] in
+                    guard let self = self else { return }
+                    checkImageCircleBound(image: image)
+                }
             } else {
                 //handle image loading failure (e.g., file not found, invalid format)
                 print("Error : could not load image from document directory : \(filePath)")
@@ -130,7 +126,11 @@ class SettingViewController: UIViewController {
         let yesAction = UIAlertAction(title: "Logout", style: .destructive) { [weak self] _ in
             guard let self = self else { return }
             
+            //remove all images from document directory
+            FileUtil.deleteAllFileInDirectory(path: .documentDirectory)
+            
             UserDefaults.standard.set(false, forKey: "isLogin")
+            UserDefaults.standard.set("", forKey: "imageName")
         
             let keychain = KeychainSwift()
             keychain.delete("username")
@@ -208,7 +208,6 @@ extension SettingViewController: UIImagePickerControllerDelegate, UINavigationCo
     
     func checkImageCircleBound(image: UIImage){
         if ImageUtil.checkEqualImageScale(image: image) {
-            print("bounding image execution")
             userImageView.layer.cornerRadius = userImageView.frame.size.width / 2
             userImageView.layer.masksToBounds = true
         }else{

@@ -59,9 +59,14 @@ class TableNoteViewController: UIViewController {
     var bottomConstraint: Constraint!
     lazy var searchImageView = {
         let searchImageView = UIImageView()
-        searchImageView.image = UIImage(systemName: "mail.and.text.magnifyingglass")
         searchImageView.contentMode = .scaleAspectFit
-        searchImageView.tintColor = .folderColor
+        
+        guard let searchIcon = UIImage(named: "search-not-found-icon") else {
+            searchImageView.image = UIImage(systemName: "mail.and.text.magnifyingglass")
+            return searchImageView
+        }
+        searchImageView.image = searchIcon
+        
         return searchImageView
     }()
     var searchTitleLabel = {

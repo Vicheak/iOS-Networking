@@ -25,8 +25,14 @@ class LoginScreenViewController: UIViewController {
     }()
     lazy var imageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(systemName: "person.2.badge.key.fill")
         imageView.contentMode = .scaleAspectFit
+        
+        guard let loginImageIcon = UIImage(named: "login-form-img") else {
+            imageView.image = UIImage(systemName: "person.2.badge.key.fill")
+            return imageView
+        }
+        imageView.image = loginImageIcon
+        
         return imageView
     }()
     lazy var stackViewTextField = {
@@ -44,6 +50,7 @@ class LoginScreenViewController: UIViewController {
         usernameTextField.placeholder = "Enter username"
         return usernameTextField
     }()
+    var innerView = UIView()
     lazy var passwordTextField = {
         let passwordTextField = UITextField()
         passwordTextField.borderStyle = .roundedRect
@@ -51,11 +58,17 @@ class LoginScreenViewController: UIViewController {
         passwordTextField.isSecureTextEntry = true
         return passwordTextField
     }()
+    lazy var eyeShowButton = {
+        let eyeShowButton = UIButton()
+        eyeShowButton.tintColor = .black
+        eyeShowButton.setImage(eyeShowIcon, for: .normal)
+        return eyeShowButton
+    }()
     lazy var stackViewButton = {
         let stackViewButton = UIStackView()
         stackViewButton.axis = .vertical
-        stackViewButton.distribution = .fill
-        stackViewButton.alignment = .fill
+        stackViewButton.distribution = .equalCentering
+        stackViewButton.alignment = .center
         stackViewButton.spacing = 0
         stackViewButton.contentMode = .scaleToFill
         return stackViewButton
@@ -69,6 +82,9 @@ class LoginScreenViewController: UIViewController {
     }()
     let tapGestureRecognizer = UITapGestureRecognizer()
     var keyboardUtil: KeyboardUtil!
+    
+    let eyeShowIcon = UIImage(named: "eye-show-icon")!
+    let eyeHideIcon = UIImage(named: "eye-hide-icon")!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -85,6 +101,7 @@ class LoginScreenViewController: UIViewController {
         passwordTextField.delegate = self
         
         tapGestureRecognizer.addTarget(self, action: #selector(tapGestureRecognizerTapped))
+        eyeShowButton.addTarget(self, action: #selector(togglePasswordShow), for: .touchUpInside)
         loginButton.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
     }
     
@@ -115,7 +132,9 @@ class LoginScreenViewController: UIViewController {
         stackView.addArrangedSubview(imageView)
         stackView.addArrangedSubview(stackViewTextField)
         stackViewTextField.addArrangedSubview(usernameTextField)
-        stackViewTextField.addArrangedSubview(passwordTextField)
+        stackViewTextField.addArrangedSubview(innerView)
+        innerView.addSubview(passwordTextField)
+        innerView.addSubview(eyeShowButton)
         stackView.addArrangedSubview(stackViewButton)
         stackViewButton.addArrangedSubview(loginButton)
         
@@ -142,13 +161,44 @@ class LoginScreenViewController: UIViewController {
             make.height.equalTo(100)
         }
         
+        innerView.snp.makeConstraints { make in
+            make.leading.bottom.trailing.equalToSuperview()
+        }
+        
+        passwordTextField.snp.makeConstraints { make in
+            make.top.leading.trailing.equalToSuperview()
+        }
+        
+        eyeShowButton.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(9)
+            make.bottom.trailing.equalToSuperview().offset(-10)
+            make.width.equalTo(20)
+            make.height.equalTo(15)
+        }
+        
         loginButton.snp.makeConstraints { make in
             make.height.equalTo(40)
+            make.width.equalTo(200)
         }
     }
     
     @objc func tapGestureRecognizerTapped(sender: UITapGestureRecognizer){
         view.endEditing(true)
+    }
+    
+    @objc func togglePasswordShow(){
+//        if passwordTextField.isSecureTextEntry {
+//            //hide password text
+//            eyeShowButton.setImage(eyeHideIcon, for: .normal)
+//            passwordTextField.isSecureTextEntry = false
+//        } else {
+//            //show password text
+//            eyeShowButton.setImage(eyeShowIcon, for: .normal)
+//            passwordTextField.isSecureTextEntry = true
+//        }
+        
+        eyeShowButton.setImage(passwordTextField.isSecureTextEntry ? eyeHideIcon : eyeShowIcon, for: .normal)
+        passwordTextField.isSecureTextEntry = !passwordTextField.isSecureTextEntry
     }
     
     @objc func loginButtonTapped(){
@@ -189,6 +239,9 @@ class LoginScreenViewController: UIViewController {
             guard let self = self else { return }
             usernameTextField.text = ""
             passwordTextField.text = ""
+            if !passwordTextField.isSecureTextEntry {
+                togglePasswordShow()
+            }
         }
     }
     
