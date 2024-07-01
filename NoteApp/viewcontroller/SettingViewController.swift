@@ -62,7 +62,28 @@ class SettingViewController: UIViewController {
             let fileManager = FileManager.default
             let directoryPath = fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0]
             let filePath = directoryPath.appendingPathComponent(imageName)
-            //...
+            
+            if let image = UIImage(contentsOfFile: filePath.path) {
+                print("Image name : \(imageName)")
+                print("Image object : \(image)")
+                 
+                userImageView.image = image
+                checkImageCircleBound(image: image)
+                
+                //...
+                userImageView.layer.cornerRadius = userImageView.frame.size.width / 2
+                userImageView.layer.masksToBounds = true
+            } else {
+                //handle image loading failure (e.g., file not found, invalid format)
+                print("Error : could not load image from document directory : \(filePath)")
+                 
+                userImageView.image = UIImage(systemName: "person.circle.fill")
+            }
+        }else {
+            print("No image is found in user defaults")
+        
+            //set the default ui image
+            userImageView.image = UIImage(systemName: "person.circle.fill")
         }
         
         pickButton.addTarget(self, action: #selector(pickImage), for: .touchUpInside)
@@ -172,15 +193,10 @@ extension SettingViewController: UIImagePickerControllerDelegate, UINavigationCo
                 
                 //set to user image view
                 userImageView.image = image
-                if ImageUtil.checkEqualImageScale(image: image) {
-                    userImageView.layer.cornerRadius = userImageView.frame.size.width / 2
-                    userImageView.layer.masksToBounds = true
-                }else{
-                    userImageView.layer.cornerRadius = 0
-                    userImageView.layer.masksToBounds = false
-                }
+                checkImageCircleBound(image: image)
                 
                 //store image name in user defaults
+                //and if user uploads new image, overwrite the filename to new image name
                 UserDefaults.standard.set(fileName, forKey: "imageName")
             }
         }
@@ -188,6 +204,17 @@ extension SettingViewController: UIImagePickerControllerDelegate, UINavigationCo
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion: nil)
+    }
+    
+    func checkImageCircleBound(image: UIImage){
+        if ImageUtil.checkEqualImageScale(image: image) {
+            print("bounding image execution")
+            userImageView.layer.cornerRadius = userImageView.frame.size.width / 2
+            userImageView.layer.masksToBounds = true
+        }else{
+            userImageView.layer.cornerRadius = 0
+            userImageView.layer.masksToBounds = false
+        }
     }
     
 }
