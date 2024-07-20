@@ -38,17 +38,28 @@ class SettingViewController: UIViewController {
     }()
     lazy var titleLabel = {
         let titleLabel = UILabel()
-        titleLabel.font = UIFont(name: "HelveticaNeue", size: 30)
+        titleLabel.font = UIFont(name: "HelveticaNeue", size: 20)
         titleLabel.textAlignment = .center
         titleLabel.numberOfLines = 1
         return titleLabel
+    }()
+    lazy var viewUserButton = {
+        let viewUserButton = UIButton()
+        viewUserButton.setTitle("View User Info", for: .normal)
+        viewUserButton.backgroundColor = .systemBlue
+        viewUserButton.layer.cornerRadius = 10
+        viewUserButton.titleLabel?.font = UIFont.systemFont(ofSize: 12)
+        return viewUserButton
     }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         navigationItem.title = "Setting"
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "arrowshape.forward.circle"), style: .plain, target: self, action: #selector(rightBarButtonTapped))
+        navigationItem.rightBarButtonItems = [
+            UIBarButtonItem(image: UIImage(systemName: "arrowshape.forward.circle"), style: .plain, target: self, action: #selector(rightBarButtonTapped)),
+            UIBarButtonItem(image: UIImage(systemName: "person.crop.square.fill"), style: .plain, target: self, action: #selector(toViewUserInfoViewController))
+        ]
         
         setUpViews()
         
@@ -83,12 +94,14 @@ class SettingViewController: UIViewController {
         }
         
         pickButton.addTarget(self, action: #selector(pickImage), for: .touchUpInside)
+        viewUserButton.addTarget(self, action: #selector(toViewUserInfoViewController), for: .touchUpInside)
     }
     
     private func setUpViews(){
         view.addSubview(scrollView)
         scrollView.addSubview(mainView)
         mainView.addSubview(stackView)
+        mainView.addSubview(viewUserButton)
         stackView.addArrangedSubview(titleLabel)
         stackView.addArrangedSubview(userImageView)
         stackView.addArrangedSubview(pickButton)
@@ -100,6 +113,12 @@ class SettingViewController: UIViewController {
         mainView.snp.makeConstraints { make in
             make.top.leading.bottom.trailing.equalTo(scrollView.contentLayoutGuide)
             make.width.height.equalTo(scrollView.frameLayoutGuide)
+        }
+        
+        viewUserButton.snp.makeConstraints { make in
+            make.top.leading.equalToSuperview().offset(10)
+            make.height.equalTo(25)
+            make.width.equalTo(120)
         }
         
         stackView.snp.makeConstraints { make in
@@ -144,6 +163,11 @@ class SettingViewController: UIViewController {
         alertController.addAction(yesAction)
         alertController.addAction(noAction)
         present(alertController, animated: true)
+    }
+    
+    @objc func toViewUserInfoViewController(sender: UIBarButtonItem){
+        let userInfoViewController = UserInfoViewController()
+        present(userInfoViewController, animated: true)
     }
     
     @objc func pickImage(sender: UIButton){

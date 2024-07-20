@@ -20,6 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        let storyboard = UIStoryboard(name: "Main", bundle: nil)
 //        let viewController = storyboard.instantiateViewController(withIdentifier: "TestViewController")
     
+//        window?.rootViewController = UINavigationController(rootViewController: LoginScreenViewController())
         window?.rootViewController = LoginScreenViewController()
         window?.makeKeyAndVisible()
 

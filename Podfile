@@ -8,5 +8,6 @@ target 'NoteApp' do
   # Pods for NoteApp
   pod 'SnapKit', '~> 5.7.0'
   pod 'KeychainSwift', '~> 24.0'
+  pod 'NVActivityIndicatorView'
 
 end

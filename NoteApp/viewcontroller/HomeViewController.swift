@@ -8,6 +8,7 @@
 import UIKit
 import SnapKit
 import CoreData
+import KeychainSwift
 
 class HomeViewController: UIViewController {
     
@@ -103,6 +104,11 @@ class HomeViewController: UIViewController {
         // Perform a fetch.
         try? fetchedResultsController.performFetch()
         checkHomeView()
+        
+        //test access token
+        let keychain = KeychainSwift()
+        let accessToken = keychain.get("accessToken")
+        print("Access token : \(accessToken)")
     }
     
     override func viewWillAppear(_ animate: Bool){

@@ -16,5 +16,8 @@ extension NSNotification.Name {
     static let editNote = NSNotification.Name.init("editNote")
     static let deleteNote = NSNotification.Name.init("deleteNote")
     
+    static let verifyCode = NSNotification.Name.init("verifyCode")
+    static let resetPassword = NSNotification.Name.init("resetPassword")
+    
 }
 

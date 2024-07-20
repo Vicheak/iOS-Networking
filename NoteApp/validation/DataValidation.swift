@@ -9,6 +9,25 @@ import UIKit
 
 class DataValidation {
     
+    static func validateRequired(_ observer: UIViewController, field: String, fieldName: String, message: String = "This field is required!") -> Bool {
+        var alertController: UIAlertController
+        let alertAction = UIAlertAction(title: "OK", style: .destructive)
+        var alertMessage = message
+        
+        if field.isEmpty {
+            if !fieldName.isEmpty {
+                alertMessage = "\(fieldName) is required!"
+            }
+            alertController = UIAlertController(title: "Error", message: alertMessage, preferredStyle: .alert)
+            alertController.addAction(alertAction)
+            
+            observer.present(alertController, animated: true)
+            return false
+        }
+        
+        return true
+    }
+    
     static func validate(_ observer: UIViewController, title: String, detail: String, messages: [String] = [
         "Please enter title!",
         "Please enter detail!"

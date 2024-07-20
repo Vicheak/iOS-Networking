@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5213587C2C3A556A00844374 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5213587B2C3A556A00844374 /* APIService.swift */; };
+		5233E03B2C427F51004A8BAE /* ForgetPasswordScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5233E03A2C427F51004A8BAE /* ForgetPasswordScreenViewController.swift */; };
+		5233E03D2C428C68004A8BAE /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5233E03C2C428C68004A8BAE /* ResetPasswordViewController.swift */; };
 		5279BD2B2C2E46B600B6FB8E /* Notes.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5279BD292C2E46B600B6FB8E /* Notes.xcdatamodeld */; };
 		5279BD312C2E479500B6FB8E /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5279BD302C2E479500B6FB8E /* CoreDataManager.swift */; };
 		5279BD342C2E575E00B6FB8E /* CustomException.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5279BD332C2E575E00B6FB8E /* CustomException.swift */; };
@@ -16,6 +19,7 @@
 		5279BD4C2C2E62CB00B6FB8E /* Note+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5279BD482C2E62CB00B6FB8E /* Note+CoreDataProperties.swift */; };
 		528151242C32DE84008154EC /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528151232C32DE84008154EC /* TestViewController.swift */; };
 		52A69B402C300C61006A020E /* ImageUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A69B3F2C300C61006A020E /* ImageUtil.swift */; };
+		52AD5B5E2C3D7F8B00B60572 /* RegisterScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52AD5B5D2C3D7F8B00B60572 /* RegisterScreenViewController.swift */; };
 		52AF6B0E2C2C6F7C00DAAB4B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52AF6B0D2C2C6F7C00DAAB4B /* AppDelegate.swift */; };
 		52AF6B152C2C6F7C00DAAB4B /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 52AF6B142C2C6F7C00DAAB4B /* Base */; };
 		52AF6B172C2C6F7E00DAAB4B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 52AF6B162C2C6F7E00DAAB4B /* Assets.xcassets */; };
@@ -40,12 +44,18 @@
 		52AF6B572C2C988C00DAAB4B /* CreateNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52AF6B562C2C988C00DAAB4B /* CreateNoteViewController.swift */; };
 		52AF6B592C2C98FC00DAAB4B /* EditNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52AF6B582C2C98FC00DAAB4B /* EditNoteViewController.swift */; };
 		52C776F72C32C7000098A19E /* FileUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C776F62C32C7000098A19E /* FileUtil.swift */; };
+		52D4DE502C4B9EC4004EAA75 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D4DE4F2C4B9EC4004EAA75 /* User.swift */; };
+		52D4DE522C4BA040004EAA75 /* UserInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D4DE512C4BA040004EAA75 /* UserInfoViewController.swift */; };
+		52F9F0912C3E459900570632 /* VerifyCodeScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F9F0902C3E459900570632 /* VerifyCodeScreenViewController.swift */; };
 		B25780F002F625EAC73C02C1 /* Pods_NoteApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94AF4A33CEF37891243A6C80 /* Pods_NoteApp.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		0D177CC704BD0DF8A7C6AF7B /* Pods-NoteApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoteApp.release.xcconfig"; path = "Target Support Files/Pods-NoteApp/Pods-NoteApp.release.xcconfig"; sourceTree = "<group>"; };
 		2D88F1CA8E8731BA339E385A /* Pods-NoteApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoteApp.debug.xcconfig"; path = "Target Support Files/Pods-NoteApp/Pods-NoteApp.debug.xcconfig"; sourceTree = "<group>"; };
+		5213587B2C3A556A00844374 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
+		5233E03A2C427F51004A8BAE /* ForgetPasswordScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgetPasswordScreenViewController.swift; sourceTree = "<group>"; };
+		5233E03C2C428C68004A8BAE /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
 		5279BD2A2C2E46B600B6FB8E /* Notes.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Notes.xcdatamodel; sourceTree = "<group>"; };
 		5279BD302C2E479500B6FB8E /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		5279BD332C2E575E00B6FB8E /* CustomException.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomException.swift; sourceTree = "<group>"; };
@@ -55,6 +65,7 @@
 		5279BD482C2E62CB00B6FB8E /* Note+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Note+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		528151232C32DE84008154EC /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		52A69B3F2C300C61006A020E /* ImageUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUtil.swift; sourceTree = "<group>"; };
+		52AD5B5D2C3D7F8B00B60572 /* RegisterScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterScreenViewController.swift; sourceTree = "<group>"; };
 		52AF6B0A2C2C6F7C00DAAB4B /* NoteApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NoteApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		52AF6B0D2C2C6F7C00DAAB4B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		52AF6B142C2C6F7C00DAAB4B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -81,6 +92,9 @@
 		52AF6B562C2C988C00DAAB4B /* CreateNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNoteViewController.swift; sourceTree = "<group>"; };
 		52AF6B582C2C98FC00DAAB4B /* EditNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditNoteViewController.swift; sourceTree = "<group>"; };
 		52C776F62C32C7000098A19E /* FileUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileUtil.swift; sourceTree = "<group>"; };
+		52D4DE4F2C4B9EC4004EAA75 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		52D4DE512C4BA040004EAA75 /* UserInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoViewController.swift; sourceTree = "<group>"; };
+		52F9F0902C3E459900570632 /* VerifyCodeScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyCodeScreenViewController.swift; sourceTree = "<group>"; };
 		94AF4A33CEF37891243A6C80 /* Pods_NoteApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NoteApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -96,6 +110,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5213587A2C3A555300844374 /* service */ = {
+			isa = PBXGroup;
+			children = (
+				5213587B2C3A556A00844374 /* APIService.swift */,
+			);
+			path = service;
+			sourceTree = "<group>";
+		};
 		5279BD322C2E575000B6FB8E /* exception */ = {
 			isa = PBXGroup;
 			children = (
@@ -125,6 +147,7 @@
 		52AF6B0C2C2C6F7C00DAAB4B /* NoteApp */ = {
 			isa = PBXGroup;
 			children = (
+				5213587A2C3A555300844374 /* service */,
 				5279BD322C2E575000B6FB8E /* exception */,
 				52AF6B432C2C89F000DAAB4B /* view */,
 				52AF6B402C2C89AF00DAAB4B /* datasource */,
@@ -158,6 +181,11 @@
 				52AF6B562C2C988C00DAAB4B /* CreateNoteViewController.swift */,
 				52AF6B582C2C98FC00DAAB4B /* EditNoteViewController.swift */,
 				528151232C32DE84008154EC /* TestViewController.swift */,
+				52AD5B5D2C3D7F8B00B60572 /* RegisterScreenViewController.swift */,
+				52F9F0902C3E459900570632 /* VerifyCodeScreenViewController.swift */,
+				5233E03A2C427F51004A8BAE /* ForgetPasswordScreenViewController.swift */,
+				5233E03C2C428C68004A8BAE /* ResetPasswordViewController.swift */,
+				52D4DE512C4BA040004EAA75 /* UserInfoViewController.swift */,
 			);
 			path = viewcontroller;
 			sourceTree = "<group>";
@@ -194,6 +222,7 @@
 			isa = PBXGroup;
 			children = (
 				5279BD292C2E46B600B6FB8E /* Notes.xcdatamodeld */,
+				52D4DE4F2C4B9EC4004EAA75 /* User.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -355,8 +384,12 @@
 				52C776F72C32C7000098A19E /* FileUtil.swift in Sources */,
 				52AF6B4D2C2C90AB00DAAB4B /* CreateFolderViewController.swift in Sources */,
 				5279BD342C2E575E00B6FB8E /* CustomException.swift in Sources */,
+				5233E03B2C427F51004A8BAE /* ForgetPasswordScreenViewController.swift in Sources */,
+				52F9F0912C3E459900570632 /* VerifyCodeScreenViewController.swift in Sources */,
 				52AF6B512C2C924F00DAAB4B /* EditFolderViewController.swift in Sources */,
+				52AD5B5E2C3D7F8B00B60572 /* RegisterScreenViewController.swift in Sources */,
 				52AF6B482C2C8CA100DAAB4B /* NSNotification.Name + Ext.swift in Sources */,
+				52D4DE522C4BA040004EAA75 /* UserInfoViewController.swift in Sources */,
 				5279BD312C2E479500B6FB8E /* CoreDataManager.swift in Sources */,
 				52AF6B4F2C2C90E500DAAB4B /* DataValidation.swift in Sources */,
 				52AF6B2A2C2C774000DAAB4B /* TabBarController.swift in Sources */,
@@ -375,9 +408,12 @@
 				52AF6B2C2C2C77BC00DAAB4B /* HomeNavigationController.swift in Sources */,
 				52AF6B282C2C75D800DAAB4B /* UIColor + Ext.swift in Sources */,
 				52AF6B2E2C2C77D300DAAB4B /* SettingNavigationController.swift in Sources */,
+				5233E03D2C428C68004A8BAE /* ResetPasswordViewController.swift in Sources */,
 				52AF6B322C2C780000DAAB4B /* SettingViewController.swift in Sources */,
 				52AF6B302C2C77F800DAAB4B /* HomeViewController.swift in Sources */,
+				5213587C2C3A556A00844374 /* APIService.swift in Sources */,
 				52AF6B452C2C8A0100DAAB4B /* FolderCollectionViewCell.swift in Sources */,
+				52D4DE502C4B9EC4004EAA75 /* User.swift in Sources */,
 				52AF6B572C2C988C00DAAB4B /* CreateNoteViewController.swift in Sources */,
 				52AF6B3A2C2C863300DAAB4B /* LoginValidation.swift in Sources */,
 				52AF6B372C2C849000DAAB4B /* KeyboardUtil.swift in Sources */,

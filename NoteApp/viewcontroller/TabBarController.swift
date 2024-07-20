@@ -22,10 +22,10 @@ class TabBarController: UITabBarController {
         settingNavigationController.tabBarItem.title = "Setting"
         settingNavigationController.tabBarItem.badgeColor = .red
         
-        let keychain = KeychainSwift()
-        let username = keychain.get("username")
+//        let keychain = KeychainSwift()
+//        let username = keychain.get("username")
         
-        settingNavigationController.tabBarItem.badgeValue = username
+//        settingNavigationController.tabBarItem.badgeValue = username
         
         setViewControllers([homeNavigationController, settingNavigationController], animated: true)
         selectedViewController = homeNavigationController
