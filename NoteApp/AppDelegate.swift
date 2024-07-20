@@ -21,7 +21,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        let viewController = storyboard.instantiateViewController(withIdentifier: "TestViewController")
     
 //        window?.rootViewController = UINavigationController(rootViewController: LoginScreenViewController())
-        window?.rootViewController = LoginScreenViewController()
+        
+        
+        let isLogin = UserDefaults.standard.bool(forKey: "isLogin")
+        if isLogin {
+            window?.rootViewController = TabBarController()
+        } else {
+            window?.rootViewController = LoginScreenViewController()
+        }
         window?.makeKeyAndVisible()
 
         let navigationBarAppearance = UINavigationBarAppearance()

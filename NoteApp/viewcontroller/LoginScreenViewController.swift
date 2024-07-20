@@ -311,8 +311,6 @@ class LoginScreenViewController: UIViewController {
     }
     
     private func validateLogin(username: String, password: String){
-        
-        
         let isLogin = UserDefaults.standard.bool(forKey: "isLogin")
         if isLogin {
             navigateToHome()
