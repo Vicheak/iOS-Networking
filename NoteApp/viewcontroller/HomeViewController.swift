@@ -106,9 +106,9 @@ class HomeViewController: UIViewController {
         checkHomeView()
         
         //test access token
-        let keychain = KeychainSwift()
-        let accessToken = keychain.get("accessToken")
-        print("Access token : \(accessToken)")
+//        let keychain = KeychainSwift()
+//        let accessToken = keychain.get("accessToken")
+//        print("Access token : \(accessToken)")
     }
     
     override func viewWillAppear(_ animate: Bool){

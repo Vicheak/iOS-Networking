@@ -75,7 +75,11 @@ class SettingViewController: UIViewController {
             let filePath = directoryPath.appendingPathComponent(imageName)
             
             if let image = UIImage(contentsOfFile: filePath.path) {
-                userImageView.image = image
+                UIView.transition(with: userImageView, duration: 1.5, options: [.transitionFlipFromLeft]) { [weak self] in
+                    guard let self = self else { return }
+                    userImageView.image = image
+                } completion: { _ in }
+                
                 DispatchQueue.main.async { [weak self] in
                     guard let self = self else { return }
                     checkImageCircleBound(image: image)
@@ -84,13 +88,19 @@ class SettingViewController: UIViewController {
                 //handle image loading failure (e.g., file not found, invalid format)
                 print("Error : could not load image from document directory : \(filePath)")
                  
-                userImageView.image = UIImage(systemName: "person.circle.fill")
+                UIView.transition(with: userImageView, duration: 1.5, options: [.transitionFlipFromLeft]) { [weak self] in
+                    guard let self = self else { return }
+                    userImageView.image = UIImage(systemName: "person.circle.fill")
+                } completion: { _ in }
             }
         }else {
             print("No image is found in user defaults")
         
             //set the default ui image
-            userImageView.image = UIImage(systemName: "person.circle.fill")
+            UIView.transition(with: userImageView, duration: 1.5, options: [.transitionFlipFromLeft]) { [weak self] in
+                guard let self = self else { return }
+                userImageView.image = UIImage(systemName: "person.circle.fill")
+            } completion: { _ in }
         }
         
         pickButton.addTarget(self, action: #selector(pickImage), for: .touchUpInside)
@@ -157,7 +167,9 @@ class SettingViewController: UIViewController {
             CoreDataManager.shared.deleteAllData(entityName: "Folder")
             CoreDataManager.shared.deleteAllData(entityName: "Note")
             
-            dismiss(animated: false)
+            tabBarController?.modalTransitionStyle = .crossDissolve
+            
+            dismiss(animated: true)
         }
         let noAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in }
         alertController.addAction(yesAction)
@@ -216,7 +228,11 @@ extension SettingViewController: UIImagePickerControllerDelegate, UINavigationCo
                 print("Save image URL : \(savedURL)")
                 
                 //set to user image view
-                userImageView.image = image
+                UIView.transition(with: userImageView, duration: 1.5, options: [.transitionFlipFromLeft]) { [weak self] in
+                    guard let self = self else { return }
+                    userImageView.image = image
+                } completion: { _ in }
+              
                 checkImageCircleBound(image: image)
                 
                 //store image name in user defaults

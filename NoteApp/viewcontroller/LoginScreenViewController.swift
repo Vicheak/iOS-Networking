@@ -365,6 +365,7 @@ class LoginScreenViewController: UIViewController {
     private func navigateToHome(){
         //proceed home screen
         let tabBarController = TabBarController()
+        tabBarController.modalTransitionStyle = .coverVertical
         
         present(tabBarController, animated: true) { [weak self] in
             guard let self = self else { return }
